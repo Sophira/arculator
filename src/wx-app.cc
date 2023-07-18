@@ -68,7 +68,10 @@ bool App::OnInit()
 		exit(-1);
 	}
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+		wxMessageBox("SDL could not be initialised: " + wxString(SDL_GetError()), "Arculator", wxOK | wxCENTRE | wxSTAY_ON_TOP);
+		exit(-1);
+	}
 	joystick_init();
 
 	frame = new Frame(this, "null frame", wxPoint(500, 500),
